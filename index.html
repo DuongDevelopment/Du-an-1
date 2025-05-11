@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quán ăn Linh Béo</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>🍜 Quán ăn Linh Béo</h1>
+        <p>Thơm ngon - Nóng hổi - Giao tận nơi!</p>
+    </header>
+
+    <main>
+        <section class="menu-section">
+            <h2>📋 Thực đơn hôm nay</h2>
+            <div class="menu">
+                <!-- Danh sách món ăn -->
+                <div class="item">
+                    <img src="images/buncha.png" alt="Bún chả">
+                    <h3>Bún chả</h3>
+                    <p>30,000đ</p>
+                    <button onclick="addToCart('Bún chả', 30000)">Thêm</button>
+                </div>
+                <div class="item">
+                    <img src="images/bunbo.png" alt="Bún bò" />
+                    <h3>Bún bò</h3>
+                    <p>30,000đ</p>
+                    <button onclick="addToCart('Bún bò', 30000)">Thêm</button>
+                </div>
+                <div class="item">
+                    <img src="images/bunca.png" alt="Bún cá" />
+                    <h3>Bún cá</h3>
+                    <p>30,000đ</p>
+                    <button onclick="addToCart('Bún cá', 30000)">Thêm</button>
+                </div>
+                <div class="item">
+                    <img src="images/bunrieucua.png" alt="Bún riêu cua" />
+                    <h3>Bún riêu cua</h3>
+                    <p>30,000đ</p>
+                    <button onclick="addToCart('Bún riêu cua', 30000)">Thêm</button>
+                </div>
+                <div class="item">
+                    <img src="images/comrangthapcam.png" alt="Cơm rang thập cẩm" />
+                    <h3>Cơm rang thập cẩm</h3>
+                    <p>30,000đ</p>
+                    <button onclick="addToCart('Cơm rang thập cẩm', 30000)">Thêm</button>
+                </div>
+                <div class="item">
+                    <img src="images/comrangduabo.png" alt="Cơm rang dưa bò" />
+                    <h3>Cơm rang dưa bò</h3>
+                    <p>30,000đ</p>
+                    <button onclick="addToCart('Cơm rang dưa bò', 30000)">Thêm</button>
+                </div>
+                <div class="item">
+                    <img src="images/comrangduiga.png" alt="Cơm rang đùi gà" />
+                    <h3>Cơm rang đùi gà</h3>
+                    <p>45,000đ</p>
+                    <button onclick="addToCart('Cơm rang đùi gà', 45000)">Thêm</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Giỏ hàng + đặt hàng -->
+        <section id="cart-items" style="display: none;">
+            <h3>🛒 Món đã chọn</h3>
+            <ul id="cart-list"></ul>
+            <p><strong>Tổng tiền:</strong> <span id="cart-total">0</span>đ</p>
+
+            <h2>📝 Thông tin đặt hàng</h2>
+            <form id="order-form">
+                <label for="name">Họ tên:</label>
+                <input type="text" id="name" required />
+
+                <label for="phone">Số điện thoại:</label>
+                <input type="tel" id="phone" required />
+
+                <label for="address">Địa chỉ:</label>
+                <textarea id="address" required></textarea>
+
+                <button type="submit">Gửi đơn hàng</button>
+            </form>
+
+            <div id="order-confirmation"></div>
+        </section>
+    </main>
+
+    <footer>
+        <h3>📞 Liên hệ</h3>
+        <p>🏠 Địa chỉ: Thôn 5, Xã Hòa Lạc, Huyện Thạch Thất, TP. Hà Nội</p>
+        <p>📱 SĐT: 0977 238 247 | 0374 717 859</p>
+        <p>✉️ Email: quanlinhbeo@example.com</p>
+        <p>🌐 Facebook: <a href="https://facebook.com/quanlinhbeo" target="_blank">facebook.com/quanlinhbeo</a></p>
+        <p style="margin-top: 10px;">&copy; 2025 Quán ăn Linh Béo</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
