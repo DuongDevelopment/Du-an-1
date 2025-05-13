@@ -198,3 +198,28 @@ footer {
     color: #666;
     margin-top: 40px;
 }
+
+.quantity-btn {
+    margin-left: 8px;
+    padding: 4px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff914d;
+    /* cam nhẹ */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-btn:hover {
+    background-color: #ff6b00;
+    transform: scale(1.1);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+    background-color: #e65c00;
+}

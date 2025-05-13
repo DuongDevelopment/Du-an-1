@@ -5,7 +5,7 @@ function addToCart(name, price) {
     const existingItem = cart.find(item => item.name === name);
     if (existingItem) {
         existingItem.quantity++;
-        existingItem.price = existingItem.quantity * price; // Correct price calculation
+        existingItem.price = existingItem.quantity * price;
     } else {
         cart.push({ name, quantity: 1, price });
     }
@@ -13,15 +13,25 @@ function addToCart(name, price) {
     updateCartDisplay();
 }
 
-function removeFromCart(name, price) {
+function increaseQuantity(name, price) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity++;
+        item.price = item.quantity * price;
+        total += price;
+        updateCartDisplay();
+    }
+}
+
+function decreaseQuantity(name, price) {
     const itemIndex = cart.findIndex(item => item.name === name);
     if (itemIndex !== -1) {
         const item = cart[itemIndex];
         if (item.quantity > 1) {
             item.quantity--;
-            item.price -= price; // Adjust price for the removed quantity
+            item.price = item.quantity * price;
         } else {
-            cart.splice(itemIndex, 1); // Remove item entirely if quantity is 1
+            cart.splice(itemIndex, 1);
         }
         total -= price;
         updateCartDisplay();
@@ -34,19 +44,30 @@ function updateCartDisplay() {
     const cartBox = document.getElementById('cart-items');
 
     cartBox.style.display = cart.length > 0 ? 'block' : 'none';
-
     cartList.innerHTML = '';
+
     cart.forEach((item, index) => {
         const li = document.createElement('li');
-        li.textContent = `${index + 1}. ${item.name} x${item.quantity} - ${(item.price).toLocaleString()}đ`;
+        li.innerHTML = `
+      ${index + 1}. ${item.name} x${item.quantity} - ${item.price.toLocaleString()}đ
+    `;
 
-        // Create a remove button for each item
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Hủy';
-        removeButton.classList.add('remove-btn');
-        removeButton.addEventListener('click', () => removeFromCart(item.name, item.price / item.quantity)); // Price per item for correct total adjustment
+        const minusBtn = document.createElement('button');
+        minusBtn.textContent = '-';
+        minusBtn.classList.add('quantity-btn');
+        minusBtn.addEventListener('click', () => {
+            decreaseQuantity(item.name, item.price / item.quantity);
+        });
 
-        li.appendChild(removeButton);
+        const plusBtn = document.createElement('button');
+        plusBtn.textContent = '+';
+        plusBtn.classList.add('quantity-btn');
+        plusBtn.addEventListener('click', () => {
+            increaseQuantity(item.name, item.price / item.quantity);
+        });
+
+        li.appendChild(minusBtn);
+        li.appendChild(plusBtn);
         cartList.appendChild(li);
     });
 
@@ -59,7 +80,6 @@ document.getElementById("order-form").addEventListener("submit", function (e) {
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const address = document.getElementById("address").value.trim();
-
     const confirmationDiv = document.getElementById("order-confirmation");
 
     if (!name || !phone || !address || cart.length === 0) {
@@ -73,7 +93,7 @@ document.getElementById("order-form").addEventListener("submit", function (e) {
     });
     itemsListHTML += "</ul>";
 
-    confirmationDiv.innerHTML = ` 
+    confirmationDiv.innerHTML = `
     <h3>✅ Đặt hàng thành công!</h3>
     <p><strong>Khách hàng:</strong> ${name}</p>
     <p><strong>SDT:</strong> ${phone}</p>
@@ -83,7 +103,6 @@ document.getElementById("order-form").addEventListener("submit", function (e) {
     <p><strong>Tổng tiền:</strong> ${total.toLocaleString()}đ</p>
   `;
 
-    // Optionally, clear the cart after order confirmation
     cart = [];
     total = 0;
     updateCartDisplay();
